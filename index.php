@@ -33,7 +33,7 @@
                         <!-- Action Buttons -->
                         <div class="flex space-x-4">
                             <a href="/views/commun/log_in.php" class="bg-[#d9910d] text-[#0d0d0d] px-6 py-2 rounded-lg hover:bg-[#bf9e60] transition-colors duration-300 shadow-md">Connexion</a>
-                            <a href="/views/commun/not_found.php" class="bg-[#bf9e60] text-[#0d0d0d] px-6 py-2 rounded-lg hover:bg-[#d9910d] transition-colors duration-300 shadow-md">S'inscrire</a>
+                            <a href="/views/commun/sing_in.php" class="bg-[#bf9e60] text-[#0d0d0d] px-6 py-2 rounded-lg hover:bg-[#d9910d] transition-colors duration-300 shadow-md">S'inscrire</a>
                         </div>
                     </div>
 
