@@ -55,8 +55,8 @@
                         <a href="#about" class="block py-2 text-[#f2dcb3] hover:bg-[#d9910d]/20">À Propos</a>
                         <a href="#contact" class="block py-2 text-[#f2dcb3] hover:bg-[#d9910d]/20">Contact</a>
                         <div class="flex flex-col space-y-2 pt-4">
-                            <a href="/login" class="bg-[#d9910d] text-[#0d0d0d] text-center py-2 rounded-lg hover:bg-[#bf9e60] transition-colors duration-300">Connexion</a>
-                            <a href="/subscribe" class="bg-[#bf9e60] text-[#0d0d0d] text-center py-2 rounded-lg hover:bg-[#d9910d] transition-colors duration-300">S'inscrire</a>
+                            <a href="/views/commun/log_in.php" class="bg-[#d9910d] text-[#0d0d0d] text-center py-2 rounded-lg hover:bg-[#bf9e60] transition-colors duration-300">Connexion</a>
+                            <a href="/views/commun/sing_in.php" class="bg-[#bf9e60] text-[#0d0d0d] text-center py-2 rounded-lg hover:bg-[#d9910d] transition-colors duration-300">S'inscrire</a>
                         </div>
                     </div>
                 </div>
