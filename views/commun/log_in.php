@@ -17,7 +17,7 @@
                 <div class="flex items-center justify-between">
                     <!-- Logo -->
                     <div class="flex items-center">
-                        <img src="/asset/brand_logo.jpg" alt="Logo AvocatConnect" class="w-16 h-16 object-contain rounded-full border-2 border-[#d9910d]">
+                        <img src="/asset/brand_logo.jpg" alt="Logo AvocatConnect" class="w-20 h-10 object-contain rounded-full border-2 border-[#d9910d]">
                         <span class="ml-3 text-xl font-bold text-[#f2dcb3]">AvocatConnect</span>
                     </div>
 
