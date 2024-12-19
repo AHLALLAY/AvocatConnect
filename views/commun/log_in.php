@@ -1,4 +1,9 @@
-<?php ?>
+<?php
+    require_once ('../config/conn.php');
+    
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -74,7 +79,7 @@
                         <p class="text-sm mt-2">Connectez-vous à votre compte AvocatConnect</p>
                     </div>
 
-                    <form action="/login" method="POST" class="space-y-6">
+                    <form action="/views/client/dashbord_client.php" method="POST" class="space-y-6">
                         <div>
                             <label for="email" class="block text-[#735a3d] font-medium mb-2">Adresse Email</label>
                             <input
