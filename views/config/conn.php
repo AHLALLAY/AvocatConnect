@@ -3,10 +3,15 @@
     $username = 'root';
     $password = '';
     $database = 'AvocatConnect';
+    
     try {
-        $dbh = new PDO("mysql:host=$host;dbname=$database", $username, $password);
-        die("<script>alert('connexion réussie')</script>");
+        $conn = new PDO("mysql:host=$host;dbname=$database", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "<script>alert('connexion réussie')</script>";
+        
     } catch (PDOException $e) {
-        die("<script>alert('connexion refusée')</script>");
+        error_log("Erreur de connexion : " . $e->getMessage());
+        echo "<script>alert('connexion refusée')</script>";
     }
+
 ?>
