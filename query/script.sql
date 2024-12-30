@@ -63,13 +63,12 @@ CREATE TABLE rdv (
     Foreign Key (id_client) REFERENCES users(id_user)
 
 );
-select id_avocat from rdv where date_rdv < 13/12/2024
-JOIN users on rdv.id
 
 CREATE TABLE disponible(
     id_dispo INT PRIMARY KEY AUTO_INCREMENT,
     debut DATE NOT NULL,
     fin DATE NOT NULL,
+    id_avocat INT,
     Foreign Key (id_avocat) REFERENCES info_supp(id_avocat)
 );
 

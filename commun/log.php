@@ -9,18 +9,18 @@ if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $pass = $_POST['password'];
 
-    $query = $conn->prepare("SELECT id_users, emails, passwords, roles FROM users WHERE emails = ?");
+    $query = $conn->prepare("SELECT id_user, email, password_hash, roles FROM users WHERE email = ?");
     $query->bindParam(1, $email, PDO::PARAM_STR);
     $query->execute();
 
     $user = $query->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        if (password_verify($pass, $user['passwords'])) {
-            $_SESSION['user_id'] = $user['id_users'];
-            $_SESSION['email'] = $user['emails'];
+        if (password_verify($pass, $user['password_hash'])) {
+            $_SESSION['user_id'] = $user['id_user'];
+            $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['roles'];
-            if ($user['roles'] === 'Avocat') {
+            if ($user['roles'] === 'avocat') {
                 header('location: ../dashboards/dashboard_avocat.php');
                 exit;
             } else {

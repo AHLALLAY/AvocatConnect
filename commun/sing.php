@@ -11,30 +11,37 @@ if (isset($_POST['signin'])) {
     $choix = $_POST['role'];
     $telephone = $_POST['telephone'];
     $email = $_POST['email'];
-    $pass = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $naissance = $_POST['naissance'];
     $date = new DateTime();
     $currentdate = $date->format('Y-m-d');
 
-    $query = $conn->prepare("INSERT INTO users(nom, prenom, telephone, email ,password_hash, date_naissance, date_inscription, roles) 
-    VALUES (:nom,:prenom,:telephone,:email,:password_hash,:date_inscription,:date_naissance,:roles)");
-    
-    $query->execute([
-        ':nom' => $nom,
-        ':prenom' => $prenom,
-        ':telephone' => $telephone,
-        ':email' => $email,
-        ':password_hash' => $pass,
-        ':date_inscription' => $currentdate,
-        ':date_naissance' => $naissance,
-        ':roles' => $choix
-    ]);
+    // Vérification si l'email existe déjà
+    $get_email = $conn->prepare("SELECT * FROM users WHERE email = :email");
+    $get_email->execute([':email' => $email]);
+    $result = $get_email->fetch(PDO::FETCH_ASSOC);
 
-    $msg = "+";
+    if ($result) {
+        $msg = "L'email existe déjà.";
+    } else {
+        $query = $conn->prepare("INSERT INTO users(nom, prenom, telephone, email, password_hash, date_naissance, date_inscription, roles) 
+        VALUES (:nom, :prenom, :telephone, :email, :password_hash, :date_naissance, :date_inscription, :roles)");
 
+        $query->execute([
+            ':nom' => $nom,
+            ':prenom' => $prenom,
+            ':telephone' => $telephone,
+            ':email' => $email,
+            ':password_hash' => $pass,
+            ':date_inscription' => $currentdate,
+            ':date_naissance' => $naissance,
+            ':roles' => $choix
+        ]);
+        $msg = "Inscription réussie.";
+    }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
