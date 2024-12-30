@@ -9,22 +9,25 @@ if (isset($_POST['signin'])) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
     $choix = $_POST['role'];
-    $tele = $_POST['tele'];
+    $telephone = $_POST['telephone'];
     $email = $_POST['email'];
     $pass = password_hash($_POST['password'],PASSWORD_DEFAULT);
+    $naissance = $_POST['naissance'];
     $date = new DateTime();
     $currentdate = $date->format('Y-m-d');
 
-    $query = $conn->prepare("INSERT INTO users(noms, prenoms, emails, passwords, telephones, roles, date) 
-    VALUES (:nom,:prenom,:email,:password,:tele,:role, :date)");
+    $query = $conn->prepare("INSERT INTO users(nom, prenom, telephone, email ,password_hash, date_naissance, date_inscription, roles) 
+    VALUES (:nom,:prenom,:telephone,:email,:password_hash,:date_inscription,:date_naissance,:roles)");
+    
     $query->execute([
         ':nom' => $nom,
         ':prenom' => $prenom,
+        ':telephone' => $telephone,
         ':email' => $email,
-        ':password' => $pass,
-        ':tele' => $tele,
-        ':role' => $choix,
-        ':date' => $currentdate
+        ':password_hash' => $pass,
+        ':date_inscription' => $currentdate,
+        ':date_naissance' => $naissance,
+        ':roles' => $choix
     ]);
 
     $msg = "+";
@@ -140,9 +143,16 @@ if (isset($_POST['signin'])) {
                                 </div>
                                 <div>
                                     <input type="text"
-                                        name="tele"
+                                        name="telephone"
                                         id="tele"
                                         placeholder="Votre telephone"
+                                        class="w-full px-4 py-3 border border-[#796644] rounded-lg bg-[#1E1E18]/60 text-[#857D66] placeholder-[#857D66]/50 focus:outline-none focus:ring-2 focus:ring-[#796644] focus:border-transparent">
+                                </div>
+                                <div>
+                                    <input type="date"
+                                        name="naissance"
+                                        id="naissance"
+                                        placeholder="Votre date de naissance"
                                         class="w-full px-4 py-3 border border-[#796644] rounded-lg bg-[#1E1E18]/60 text-[#857D66] placeholder-[#857D66]/50 focus:outline-none focus:ring-2 focus:ring-[#796644] focus:border-transparent">
                                 </div>
                                 <div>

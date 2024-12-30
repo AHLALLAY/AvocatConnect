@@ -13,6 +13,7 @@ CREATE TABLE users (
     roles ENUM('avocat', 'client')
 );
 
+
 DROP TABLE users;
 
 CREATE TABLE info_supp(
@@ -55,20 +56,23 @@ CREATE TABLE info_supp(
 CREATE TABLE rdv (
     id_rdv INT PRIMARY KEY AUTO_INCREMENT,
     statut ENUM ('En attend', 'Confirmer', 'Annuler'),
+    date_rdv DATE,
     id_avocat INT,
     id_client INT,
     Foreign Key (id_avocat) REFERENCES info_supp(id_avocat),
     Foreign Key (id_client) REFERENCES users(id_user)
 
 );
+select id_avocat from rdv where date_rdv < 13/12/2024
+JOIN users on rdv.id
 
 CREATE TABLE disponible(
     id_dispo INT PRIMARY KEY AUTO_INCREMENT,
     debut DATE NOT NULL,
     fin DATE NOT NULL,
-    id_avocat INT,
     Foreign Key (id_avocat) REFERENCES info_supp(id_avocat)
 );
+
 
 INSERT INTO users (nom, prenom, telephone, email, password_hash, date_naissance, date_inscription, roles) VALUES
 ('El Fassi', 'Ahmed', '0612345678', 'ahmed.elfassi@email.com', 'password_hash_1', '1980-03-10', '2024-12-21', 'client'),

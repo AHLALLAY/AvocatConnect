@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$db_name = "test";
+$db_name = "avocatconnect";
 $username = "root";
 $password = "";
 
