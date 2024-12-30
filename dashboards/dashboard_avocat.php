@@ -2,6 +2,10 @@
 require_once('../config/conn.php');
 require_once('../commun/logout.php');
 
+$get_reservation = $conn->prepare("SELECT * FROM rdv r join users on r.id_client= users.id_user");
+$get_reservation->execute();
+$result = $get_reservation->fetchAll(PDO::FETCH_ASSOC);
+
 
 ?>
 <!DOCTYPE html>
@@ -53,7 +57,7 @@ require_once('../commun/logout.php');
         <!-- Main Content -->
         <main class="flex-1 p-6">
             <!-- Section Réservations -->
-            <section id="reservations" class="mb-8 hidden">
+            <section id="reservations" class="mb-8 ">
                 <h2 class="text-2xl font-semibold mb-4 text-[#796644]">Mes Réservations</h2>
                 <table class="min-w-full table-auto bg-white shadow-md rounded-lg">
                     <thead>
@@ -65,14 +69,14 @@ require_once('../commun/logout.php');
                         </tr>
                     </thead>
                     <tbody>
-                        <?php while ($reservation = $result->fetch_assoc()) { ?>
+                        <?php foreach ($result as $res) { ?>
                             <tr>
-                                <td class="py-2 px-4 border-b"><?php echo $reservation['client_name']; ?></td>
-                                <td class="py-2 px-4 border-b"><?php echo $reservation['date_time']; ?></td>
-                                <td class="py-2 px-4 border-b"><?php echo $reservation['status']; ?></td>
+                                <td class="py-2 px-4 border-b"><?php echo $res['nom'] . " " . $res['prenom']; ?></td>
+                                <td class="py-2 px-4 border-b"><?php echo $res['date_rdv']; ?></td>
+                                <td class="py-2 px-4 border-b"><?php echo $res['statut']; ?></td>
                                 <td class="py-2 px-4 border-b">
-                                    <button class="text-[#32342F] hover:text-[#312F24]" onclick="confirmAction('Accepter cette réservation ?')">Accepter</button>
-                                    <button class="ml-2 text-[#32342F] hover:text-[#312F24]" onclick="confirmAction('Refuser cette réservation ?')">Refuser</button>
+                                    <button class="text-[#32342F] hover:text-[#312F24]" onclick="confirm('Accepter cette réservation ?')">Accepter</button>
+                                    <button class="ml-2 text-[#32342F] hover:text-[#312F24]" onclick="confirm('Refuser cette réservation ?')">Refuser</button>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -150,7 +154,7 @@ require_once('../commun/logout.php');
             </section>
         </main>
     </div>
-    <!-- <script>
+    <script>
         function confirmLogout() {
             Swal.fire({
                 title: 'Êtes-vous sûr ?',
@@ -166,8 +170,38 @@ require_once('../commun/logout.php');
                 }
             });
         }
-    </script> -->
-    <script src="/js/avocat.js"></script>
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('reservations_btn').addEventListener('click', () => {
+                document.getElementById('reservations').classList.remove('hidden');
+                document.getElementById('profile').classList.add('hidden');
+                document.getElementById('availability').classList.add('hidden');
+                document.getElementById('statistics').classList.add('hidden');
+            });
+
+            document.getElementById('profile_btn').addEventListener('click', () => {
+                document.getElementById('reservations').classList.add('hidden');
+                document.getElementById('profile').classList.remove('hidden');
+                document.getElementById('availability').classList.add('hidden');
+                document.getElementById('statistics').classList.add('hidden');
+            });
+
+            document.getElementById('availability_btn').addEventListener('click', () => {
+                document.getElementById('reservations').classList.add('hidden');
+                document.getElementById('profile').classList.add('hidden');
+                document.getElementById('availability').classList.remove('hidden');
+                document.getElementById('statistics').classList.add('hidden');
+            });
+
+            document.getElementById('statistics_btn').addEventListener('click', () => {
+                document.getElementById('reservations').classList.add('hidden');
+                document.getElementById('profile').classList.add('hidden');
+                document.getElementById('availability').classList.add('hidden');
+                document.getElementById('statistics').classList.remove('hidden');
+            });
+        });
+    </script>
 </body>
 
 </html>
